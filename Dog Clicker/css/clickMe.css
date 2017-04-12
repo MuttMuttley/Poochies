@@ -1,0 +1,174 @@
+
+                body{
+                    /*background-image: url("dogPaw.PNG");*/
+                   /* background: rgba(255,255,255,0.1);*/
+                   
+                   background-image: url("../images/dogBoneRed.PNG");
+                   font-family: "Comic Sans MS";
+                    font-weight: bold;
+                   /* height: 100%;*/
+                    /*width: 100%;*/
+                   /* height: 100%;*/
+                }
+               
+                #title{
+                    text-align: center;
+                    color:black;
+                    font-size: 300%;
+                    background: rgba(139,69,19,0.3); 
+                    width: 100%;
+                    /*padding-top: 0;*/
+                    margin-top: 0;
+                   /* background-color: silver;*/
+                }
+                .col1{
+                    width: 25%;  
+                    position: relative;
+                    float: left;      
+                   /* overflow:auto;*/
+                    min-width: 20%;
+                   /* background-color: palegoldenrod;   */         
+                }
+                .col2{
+                    width: 5%;
+                    min-height: 3px;
+                   /* background-color: lime;*/
+                    position: relative;
+                    float: left;
+                }
+                
+             /*   .profile{*/
+                 .main{
+                    width: 70%;
+                    position: relative;
+                   float: left; 
+                    
+                    
+                  /*  background-color: saddlebrown;
+                    opacity: 0.5;
+                    */
+                    background: rgba(139,69,19,0.3);  
+                 }
+                    
+                #add-button{
+                    list-style-type: none;
+                    padding-bottom: 4px;
+                }
+                .sorry{
+                    font-size: 200%;
+                    text-align: center;
+                }
+                
+                .dog-list{
+                    background: rgba(139,69,19,0.3);
+                    list-style-type: none;
+                }
+                .buttons{
+                    border: solid 1px black;
+                    background-color:burlywood;
+                    /*border-radius: 5px;*/
+                    
+                }
+                .nameStyle{
+                    background-color:burlywood;
+                }
+                .namesList{
+                    /*margin-bottom: 2px;*/
+                    padding-top: 0;
+                    padding-bottom: 3px;
+                }
+                .remove-dog{
+                   /* position: relative;*/
+                    float: right;
+                   /* border-radius: 2px; work out for button */
+                }
+                .dog-image{
+                   /* width: 200px;*/
+                    width: 30%;
+                    height: 30%;
+                    margin-bottom: 3px;
+                   border: solid 2px rosybrown;
+                   /*border: solid 2px peru;*/
+                }
+                  
+                .dog-profile{
+                    /* could probably put all under .dog-profile*/
+                    font-weight: bold;
+                    text-align: center;
+                    font-size: 100%;
+                    color:black;
+                    /*font-stretch: ultra-expanded;*/
+                }  
+                #dog-name{
+                    font-size: 150%;
+                    
+                   /* background-color:burlywood;*/
+                }           
+                .dog-votes{
+                    color: red;
+                    /*color: black;*/
+                    min-height: 1em;
+                    font-size:  150%;
+                    
+                }
+
+                .no-votes{
+                   /* color: black;*/
+                    color:black;
+                    font-size: 100%;
+                   /* background-color:burlywood;*/
+                }
+                .toggle{
+                    font-size: 20%;
+                    min-height: 1em;
+                }
+
+                .toggleBig{ 
+                    font-size: 200%; /* 150%; */
+                    min-height: 1em;
+                }
+                #big-title{
+                    font-size: 200%;
+                    font-weight: bold;
+                }
+                /*.add-dog, .reset-clicks, .top-dog{*/
+                #add-button > input{
+                    background-color: burlywood;
+                    border: solid 1px black;
+                    font-family: "Comic Sans MS";
+                    font-weight: bold;
+                }
+                .footer{
+                    /*position: absolute;*/
+                   /* bottom: 0;*/
+                    font-size: 85%;
+                    font-weight: normal;
+                    /*background: rgba(139,69,19,0.3);*/
+                   /* clear: both; 
+                    width: 100%;*/
+                    text-align: center;
+                    height: 3em;
+                   /* position:relative;
+                    bottom: 0;
+                    clear: both;*/
+                    
+                }
+                .welcome{
+                    font-size: 120%;
+                    text-align: center;
+                    /*float: right;*/
+                }
+                .welcome2{
+                    font-size: 100%;
+                    padding-top: 3em;
+                    /*clear: both;*/
+                    /*width: 100%;*/
+                }
+                .welcome ul{
+                    list-style-position: inside;
+                    list-style-type: none;
+                    display: inline-block;
+                }
+                .welcome li{
+                    text-align: left;
+                }
