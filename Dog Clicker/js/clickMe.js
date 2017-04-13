@@ -4,12 +4,12 @@
 
                 var pathToImages="images/dogPics/";
 
-                var dogImages=["jackRussel.PNG","poodle2.PNG","cat.PNG", 
-                                "jumpingWhiteDog.PNG" ,"chiwawa.PNG",
-                                 "bassetHound.PNG","happyDog.PNG",
-                                 "airdaleTerrior.PNG","exitedDog1.PNG",
-                                 "japaneseDog.PNG","smallDog.PNG",
-                                 "proudDog.PNG"
+                var dogImages=["jackRussel.png","poodle2.png","cat.png", 
+                                "jumpingWhiteDog.png" ,"chiwawa.png",
+                                 "bassetHound.png","happyDog.png",
+                                 "airdaleTerrior.png","exitedDog1.png",
+                                 "japaneseDog.png","smallDog.png",
+                                 "proudDog.png"
                                  ];
                /* var dogNames=["Percival","Henrietta","Muttley", "Skippy",
                                 "Harold","Barney","Buster","Biscuit",
