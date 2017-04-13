@@ -250,7 +250,7 @@
                             var currentId= octopus.getCurrentProfileID();
                             
                             var $muttVotes=$(".profile .dog-profile .dog-votes"); 
-                            if(model.dogs[currentId-1].image.indexOf("cat.PNG")>=0){
+                            if(model.dogs[currentId-1].image.indexOf("cat.png")>=0){
                                 //model.dogs[currentId-1].votes=-1; 
                                 $muttVotes.html("Hey!! You're No Dog!!");
                                 $muttVotes.addClass("toggleBig");
