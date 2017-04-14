@@ -2,6 +2,11 @@
  
             $(function(){
 
+                //jQuery('.scrollbar-dynamic').scrollbar();
+                //$('.col1-inner').niceScroll({cursorcolor:"#331a00"});
+
+                  var scroller;                        
+
                 var pathToImages="images/dogPics/";
 
                 var dogImages=["jackRussel.png","poodle2.png","cat.png", 
@@ -73,9 +78,10 @@
                         //To work on renumbering ids
                         var thisID= model.dogs.length+1;
                         
-                        var renderType = "";
+                        //var renderType = "";
                         if(thisID > dogNames.length){
-                            renderType = -1;
+                            //renderType = -1;
+                            view.renderNoMoreDogs();
                         }
                         else{
                              var thisPic= ++model.lastID;
@@ -101,9 +107,10 @@
                                 votes: 0,
                             });          
                             model.currentProfileID = thisID;
-                            renderType=thisID;
+                            //renderType=thisID;
+                            view.renderProfile(thisID);
                         }
-                        view.renderProfile(renderType);
+                        //view.renderProfile(renderType);
                         //alert("back in dog add after clear renderProfile");
                         view.renderNames();                        
                     },
@@ -124,9 +131,10 @@
                             //else
                         model.dogs.pop();
                         //alert("array length after remove= "+ model.dogs.length);
-                        view.renderProfile();
+                        //view.renderProfile();
                         //alert("back in dog remove after clear renderProfile");
                         view.renderNames();
+                        view.renderBlank();
                     },
 
                     init: function(){
@@ -170,6 +178,7 @@
                         var topDogs = model.dogs.filter(hasMostClicks);
                         //return model.dogs.filter(mostclicks);
                         view.renderProfiles(topDogs);
+                    
                     },
 
                     resetClicks: function(){
@@ -177,11 +186,13 @@
                             model.dogs[i].votes=0;
                         }
                         view.renderProfile();
+                        
                     },
 
                     instructions: function(){
-                        view.renderProfile();
-                        view.renderWelcome(true);
+                         view.renderBlank();
+                         view.renderWelcome(true);
+                    
                     }
                  
                 };
@@ -288,7 +299,6 @@
                         this.renderFooter();
                     },
 
-
                     renderNames: function(){
                         var $dogList=this.$dogList;
                         var dogListTemplate=this.dogListTemplate;
@@ -300,27 +310,55 @@
                             //alert("Render: dog name= "+dog.name+" id= "+ dog.id);
                             $dogList.append(thisTemplate);
                             
-                        });                      
+                        });  
+                         
+                        if(scroller == undefined){
+                            scroller= $('#col1-inner').niceScroll(
+                            {cursorcolor:"#ff0066", background:"#66b3ff"
+                              ,autohidemode: false
+                            });
+                        }
+                        else{
+                            $("#col1-inner").getNiceScroll().resize();
+                        }
+                        
+                        // jQuery('.scrollbar-dynamic').scrollbar();
+                        //$('.col1-inner').niceScroll({cursorcolor:"#331a00"});                   
+                    },
+
+                    renderBlank: function(){
+                         var $dogProfile=this.$dogProfile;
+                         $dogProfile.html('');
+                         this.renderWelcome(false);
+                         this.renderFooter();   
+                    },
+
+                    renderNoMoreDogs: function(){
+                        var $dogProfile=this.$dogProfile;
+                        $dogProfile.html('');
+                        var noDogsMessage=
+                            "<p class=\"sorry\">"+
+                                "Sorry!, no more dogs"
+                            "</p>"
+                             ;
+                        $dogProfile.html(noDogsMessage);
+                        this.renderWelcome(false);
+                        this.renderFooter();   
                     },
 
                     renderProfile: function(dogID){
                         //alert("in renderProfile, dogID= "+ dogID);
-                        if(dogID== undefined){                          
+                       /* if(dogID== undefined){                          
                             var $dogProfile=this.$dogProfile;
                             $dogProfile.html('');
                         }
-                        else if(dogID == -1){
-                             var $dogProfile=this.$dogProfile;
-                             $dogProfile.html('');
-                             var noDogsMessage=
-                               "<p class=\"sorry\">"+
-                                    "Sorry!, no more dogs"
-                               "</p>"
-                             ;
-                             $dogProfile.html(noDogsMessage);
-                        }
-                        else if(dogID >0) //when change dogID need >=0
-                        {  //alert("in renderProfile dogID= "+  dogID);
+                        */
+                      /*  else if(dogID == -1){
+                             
+                    }
+                    */
+                       // else if(dogID >0) //when change dogID need >=0
+                       // {  //alert("in renderProfile dogID= "+  dogID);
                             var dog= model.dogs[dogID-1];
                             var $dogProfile=this.$dogProfile;
                             var profileTemplate=$('script[data-template="profile"]').html();
@@ -334,7 +372,7 @@
                                                         .replace(/{{votes}}/g,dog.votes);
                         //    alert("before append template to profile");
                             $dogProfile.append(thisTemplate);
-                        }
+                       // }
                         //alert("after append template to profile");  
                         this.renderWelcome(false);
                         this.renderFooter();                              
@@ -369,6 +407,7 @@
                 renderWelcome: function(show){
                     var $welcome=this.$welcome;
                     var welcomeString='';
+                   // alert("in welcome, show= " + show);
                    /* if (model.dogs.length > 0 ){
                         if(!$welcome.hasClass("welcome2"))
                             $welcome.addClass("welcome2");
@@ -395,9 +434,10 @@
                             "<li>- Select 'Reset' to reset all dog click-counters back to zero.</li>"+
                             "<li>- Select 'Remove' to remove a dog from the Profile list.</li>"+
                         "</ul>"+
-                        "<p style=\"color: red; font-size: 120%\">" +
-                            "Caution: Be wary when clicking on Muttley!"+
+                      /*  "<p style=\"color: red; font-size: 120%\">" +
+                            "Caution: Beware of Muttley!"+
                         "</p>"+
+                        */
                     // "</p>"+
                         "<p>"+
                         "This site was developed using HTML5, CSS3, JavaScript and Jquery. "+
@@ -406,6 +446,7 @@
                     }
                     
                      $welcome.html(welcomeString);
+                     this.renderFooter();
                 }
                 
                 };
