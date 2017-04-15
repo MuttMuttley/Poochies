@@ -50,18 +50,19 @@
 </div>
  
         <script type="text/template"  data-template="profile">        
-            <div class="dog-profile">
+            <div class="dog-profile" data-id="{{id}}">
                 <div id="big-title">{{Big-Title}}</div>
                 <p class="dog-votes">Click Me!</p>
                 <p id="dog-name">--{{name}}--</p>
-                <img class="dog-image" src={{image}} width="300px" />
+                <img class="dog-image" src={{image}} width="300px" data-id="{{id}}" />
                 <br/>
                 <div class="dog-votes"><span class="no-votes">
-                    Number of Votes:</span> &nbsp; &nbsp; {{votes}} &nbsp;!
+                    Number of Clicks:</span> &nbsp; &nbsp; {{votes}} &nbsp;!
                 </div>
                 <br/><br/>
             </div>
         </script>  
+
        
         <script src="external/jquery-3.1.1.js"></script>
         <script type="text/javascript" src="external/jquery-ui-1.12.1/jquery-ui.js"></script>
