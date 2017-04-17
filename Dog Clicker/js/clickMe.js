@@ -5,7 +5,14 @@
                 //jQuery('.scrollbar-dynamic').scrollbar();
                 //$('.col1-inner').niceScroll({cursorcolor:"#331a00"});
 
-                  var scroller;                        
+               /* $('#col1').niceScroll(
+                            {cursorcolor:"#ff0066", background:"#66b3ff"
+                              ,autohidemode: false
+                            });
+                            */
+                          
+
+                var scroller;                        
 
                 var pathToImages="images/dogPics/";
 
@@ -16,11 +23,7 @@
                                  "japaneseDog.png","smallDog.png",
                                  "proudDog.png"
                                  ];
-               /* var dogNames=["Percival","Henrietta","Muttley", "Skippy",
-                                "Harold","Barney","Buster","Biscuit",
-                                "Tony","Aki","Arthur","Lucy"
-
-                ];*/
+               
 
                  var dogNames=[{name:"Percival",isUsed:false},
                                {name:"Henrietta", isUsed:false},
@@ -72,7 +75,7 @@
                     
                 };
 
-                var octopus={                  
+                var controller={                  
                     addDog: function(){
                         
                         //To work on renumbering ids
@@ -81,7 +84,7 @@
                         //var renderType = "";
                         if(thisID > dogNames.length){
                             //renderType = -1;
-                            octopus.NoMoreDogs();
+                            controller.NoMoreDogs();
                         }
                         else{
                              var thisPic= ++model.lastID;
@@ -94,12 +97,9 @@
                             var dogName=dogNames[index%(dogNames.length)].name;
                             dogNames[index%(dogNames.length)].isUsed=true;
                             var dogImage= dogImages[index%(dogImages.length)];
-                        //var thisID= model.dogs.length;
-                            //var dogImage= dogImages[(thisPic-1)%(dogImages.length)];                    
-                            //var dogName=dogNames[(thisPic-1)%(dogNames.length)].name;
-                        //alert("new dog ID= " + thisID);
+                        
                             var dogImageFull=pathToImages.concat(dogImage);
-                        //alert("full image path= "+ dogImageFull);
+                    
                              model.dogs.push({
                                 id: thisID,
                                 name: dogName,
@@ -107,42 +107,33 @@
                                 votes: 0,
                             });          
                             model.currentProfileID = thisID;
-                            //renderType=thisID;
-                            //view.renderProfile(thisID);
-                            octopus.dogProfile(thisID);
+                            
+                            controller.dogProfile(thisID);
                         }
-                        //view.renderProfile(renderType);
-                        //alert("back in dog add after clear renderProfile");
+                        
                         view.renderNames();   
-                        //view.renderWelcome(false);
-                        //view.renderFooter();                     
+                                           
                     },
 
                     removeDog: function(dog){
                        
-                        //alert("in remove dog, dog.id= "+ dog.id);
-                        //new system with limited dog #
+                       
                         var dogImage = model.dogs[dog.id-1].image.replace(pathToImages,'');
                         var index = dogImages.indexOf(dogImage);
                         var dogName= model.dogs[dog.id-1].name;
-                        //alert("in remove dogName= "+dogName);
-                        //alert("in remove index of image= "+ index);
+                       
                         dogNames[index].isUsed=false;
 
                         if(model.dogs.length > 1){
                             model.dogs.swapDogs(dog.id-1,model.dogs.length-1);
                             alert();
                         }
-                            //model.dogs.splice(dog.id-1,1);
-                            //else
+                            
                         model.dogs.pop();
-                        //alert("array length after remove= "+ model.dogs.length);
-                        //view.renderProfile();
-                        //alert("back in dog remove after clear renderProfile");
+                        
                         view.renderNames();
-                        octopus.bye(dogName);
-                        //view.renderBlank();
-                        //octopus.blankPage();
+                        controller.bye(dogName);
+                        
                     },
 
                     init: function(){
@@ -158,7 +149,6 @@
                     },
 
                     dogProfile: function(dogID){
-                        //alert("in dogProfile dogID= "+dogID);
                         
                         view.renderProfile(dogID);
                         view.renderWelcome(false);
@@ -167,28 +157,18 @@
 
                     addVote: function(){
                         var dogID= this.getCurrentProfileID();
-                        //alert("in addVote currentId= "+ dogID);
                         var no_votes = model.dogs[dogID-1].votes++;
-                        //alert("number of votes= "+ model.dogs[dogID-1].votes);
-                        //view.refreshDiv();
-                        //alert("in add votes dogId= "+ dogID + " no votes= "+ no_votes);
-                        //view.renderProfile(dogID);
-                        //view.renderWelcome(false);
-                        //view.renderFooter();
-                        octopus.dogProfile(dogID);
+                        controller.dogProfile(dogID);
                     },
 
                     getMostClicks: function(){
-                      /*  var dogID = model.dogs.mostClicks();
-                        if(dogID > -1)
-                            view.renderProfile(dogID);
-                            */
+                      
                         var mostclicks=model.dogs.mostClicks();
                         function hasMostClicks(dogs){
                             return (dogs.votes == mostclicks);
                         }
                         var topDogs = model.dogs.filter(hasMostClicks);
-                        //return model.dogs.filter(mostclicks);
+
                         view.renderProfiles(topDogs);
                         view.renderWelcome(false);
                         view.renderFooter(); 
@@ -199,8 +179,7 @@
                         for(var i=0; i< model.dogs.length; i++){
                             model.dogs[i].votes=0;
                         }
-                        //view.renderBlank();
-                        //blankPage();
+                        
                         view.renderReset();
                         view.renderWelcome(false);
                         view.renderFooter();  
@@ -220,7 +199,7 @@
                     },
 
                     NoMoreDogs: function(){
-                        //view.renderBlank();
+                        
                         view.renderNoMoreDogs();
                         view.renderWelcome(false);
                         view.renderFooter();  
@@ -239,32 +218,32 @@
                    
                     init: function(){
 
-                      //add listener to add dogs  
+                      
                         var addDogBtn=$('.add-dog');
                         addDogBtn.click(   
                             function(){
-                                octopus.addDog();
+                                controller.addDog();
                             
                         });
                         
                         var topDogBtn=$('.top-dog');
                         topDogBtn.click(
                             function(){
-                                octopus.getMostClicks();
+                                controller.getMostClicks();
                             }
                         );
 
                         var resetClicksBtn=$('.reset-clicks');
                         resetClicksBtn.click(
                             function(){
-                                octopus.resetClicks();
+                                controller.resetClicks();
                             }
                         );
 
                         var instructionsBtn=$('.instructions');
                         instructionsBtn.click(
                             function(){
-                                octopus.instructions();
+                                controller.instructions();
                             }
                         );
      
@@ -275,22 +254,22 @@
 
                         this.$footer=$('.footer');
 
-                        //add listener to remove dogs
+                       
                         this.$dogList.on('click','.remove-dog',function(){
                             var dog=$(this).parents('.namesList').data();
-                            //alert("in remove event function, dog data id = "+dog.id);                    
-                            octopus.removeDog(dog);
+                                               
+                            controller.removeDog(dog);
                         });
 
                         this.$dogProfile = $('.profile');
                         this.profileTemplate= $('script[data-template="profile"]').html();
 
                         this.$dogList.on('click','.dog-name',function(){
-                            //alert("clicked on dog's name label");
+                            
                             var dogID=($(this).parents('.namesList').data()).id;
-                            //alert(" dog.id= "+dogID);
-                            octopus.setCurrentProfileID(dogID);
-                            octopus.dogProfile(dogID);
+                            
+                            controller.setCurrentProfileID(dogID);
+                            controller.dogProfile(dogID);
                         });
 
                         
@@ -298,12 +277,12 @@
                             
                              
                             var currentId=event.target.getAttribute("data-id");
-                            octopus.setCurrentProfileID(currentId);
-                            octopus.dogProfile(currentId);
-                            //alert("in image click after first load profile");
+                            controller.setCurrentProfileID(currentId);
+                            controller.dogProfile(currentId);
+                            
                             var $muttVotes=$(".profile .dog-profile .dog-votes");
                             if(model.dogs[currentId-1].image.indexOf("cat.png")>=0){
-                                //model.dogs[currentId-1].votes=-1; 
+                                 
                                 $muttVotes.html("Hey!! You're No Dog!!");
                                 $muttVotes.addClass("toggleBig");
                                  $muttVotes.effect("pulsate",{times:1});
@@ -322,7 +301,7 @@
                                 demoTimeout=setTimeout(function(){
                                     $hotdog.trigger('stopRumble');
                                     
-                                    octopus.addVote();
+                                    controller.addVote();
                                 }, 800
                                 );       
                             }                                         
@@ -338,17 +317,18 @@
                         var dogListTemplate=this.dogListTemplate;
                         $dogList.html('');
                         model.dogs.forEach(function(dog){
-                            //alert("in render dog.id= "+dog.id+ " dog.name= "+ dog.name);
+                            
                             var thisTemplate=dogListTemplate.replace(/{{name}}/g,dog.name)
                                                             .replace(/{{id}}/g,dog.id);
-                            //alert("Render: dog name= "+dog.name+" id= "+ dog.id);
+                            
                             $dogList.append(thisTemplate);
                             
                         });  
                          
                         if(scroller == undefined){
                             scroller= $('#col1-inner').niceScroll(
-                            {cursorcolor:"#ff0066", background:"#66b3ff"
+                            {cursorcolor:"#0066ff", background:"#ffffff"
+                              ,cursorborder: "1px solid #0066ff"
                               ,autohidemode: false
                             });
                         }
@@ -356,15 +336,13 @@
                             $("#col1-inner").getNiceScroll().resize();
                         }
                         
-                        // jQuery('.scrollbar-dynamic').scrollbar();
-                        //$('.col1-inner').niceScroll({cursorcolor:"#331a00"});                   
+                                          
                     },
 
                     renderBlank: function(){
                          var $dogProfile=this.$dogProfile;
                          $dogProfile.html('');
-                         //this.renderWelcome(false);
-                         //this.renderFooter();   
+                           
                     },
 
                     renderNoMoreDogs: function(){ 
@@ -388,37 +366,20 @@
                     },
 
                     renderProfile: function(dogID){
-                        //alert("in renderProfile, dogID= "+ dogID);
-                       /* if(dogID== undefined){                          
-                            var $dogProfile=this.$dogProfile;
-                            $dogProfile.html('');
-                        }
-                        */
-                      /*  else if(dogID == -1){
-                             
-                    }
-                    */
-                       // else if(dogID >0) //when change dogID need >=0
-                       // {  //alert("in renderProfile dogID= "+  dogID);
+                        
                             var dog= model.dogs[dogID-1];
                             var $dogProfile=this.$dogProfile;
                             var profileTemplate=$('script[data-template="profile"]').html();
                             $dogProfile.html('');
-                        //alert("dog.name= "+ dog.name+ " dog.image= "
-                        //+ dog.image + " dog.votes= "+ dog.votes);
-                         //   alert("profileTemplate= "+ profileTemplate);
+                        
                             var thisTemplate=profileTemplate.replace(/{{id}}/g,dog.id)
                                                         .replace(/{{Big-Title}}/g,"")
                                                         .replace(/{{name}}/g,dog.name)
                                                         .replace(/{{image}}/g,dog.image)
                                                         .replace(/{{votes}}/g,dog.votes);
-                        //    alert("before append template to profile");
-                            $dogProfile.append(thisTemplate);
-                       // }
-                        //alert("after append template to profile");
                         
-                        //this.renderWelcome(false);
-                        //this.renderFooter();                              
+                            $dogProfile.append(thisTemplate);
+                                                  
                     },
 
                     renderProfiles: function(SelectDogs){
@@ -447,8 +408,10 @@
 
                 renderBye: function(dogName){
                     var $dogProfile=this.$dogProfile;
+                    var sadPug=pathToImages.concat("sadPug.png"); 
                     var byeMessage= "<p class=\"sorry\">"+
-                    "Bye Bye "+ dogName + 
+                    "Bye Bye "+ dogName + "&nbsp;"+
+                    "<img id= \"bye\" src = \"images/dogPics/sadFace.png\" />" +
                     "</p>";
                     $dogProfile.html(byeMessage);
                 },
@@ -457,24 +420,15 @@
                 renderWelcome: function(show){
                     var $welcome=this.$welcome;
                     var welcomeString='';
-                   // alert("in welcome, show= " + show);
-                   /* if (model.dogs.length > 0 ){
-                        if(!$welcome.hasClass("welcome2"))
-                            $welcome.addClass("welcome2");
-                    }
-                    else {
-                        if($welcome.hasClass("welcome2"))
-                            $welcome.removeClass("welcome2");
-                    }
-                    */
+                   
                     $welcome.html('');
                     if(show){
                         welcomeString=               
                         "<p>" +
-                        "Welcome to DogClicker! This is a code sample based on cowclicker.com, "+
+                        "Welcome to DogClicker! This is a JavaScript code sample based on cowclicker.com, "+
                         "where one clicks on an image of a cow to increment a click-counter. "+
                         "</p>"+
-                     //"<p>"+
+                     
                         "<p> Directions: <p/>" +
                         "<ul>" +
                             "<li>- Select 'Add Dog' to add dogs to the list of profiles. </li>"+
@@ -484,11 +438,7 @@
                             "<li>- Select 'Reset' to reset all dog click-counters back to zero.</li>"+
                             "<li>- Select 'Remove' to remove a dog from the Profile list.</li>"+
                         "</ul>"+
-                      /*  "<p style=\"color: red; font-size: 120%\">" +
-                            "Caution: Beware of Muttley!"+
-                        "</p>"+
-                        */
-                    // "</p>"+
+                     
                         "<p>"+
                         "This site was developed using HTML5, CSS3, JavaScript and Jquery. "+
                         "A Model-View-Controller design pattern with templates was employed." +
@@ -505,6 +455,6 @@
                 
                 };
 
-                octopus.init();
+                controller.init();
             }());
         

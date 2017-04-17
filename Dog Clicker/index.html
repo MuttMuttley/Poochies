@@ -2,7 +2,7 @@
 <html>
     <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Dog Clicker MVO</title>
+            <title>Dog Clicker</title>
             <link  rel="stylesheet" href="external/jquery-ui-1.12.1/jquery-ui.css">     
             <link  rel="stylesheet" href="css/clickMe.css">           
     </head>
@@ -11,8 +11,11 @@
         <h1 id="title">--Dog Clicker!--</h1>  
         
         <div id="col1">
-            <p id="title">Profiles</p>
+            
+            <div id="header-buttons">
+                <p id="header">Profiles</p>
             <ul>
+                
               <li id="add-button">   
                                
                         <input type="button" value="Add Dog" class="add-dog" />
@@ -24,7 +27,7 @@
                     <input type="button" value="Instructions" class="instructions"/>
                 </li>      
             </ul>   
-                
+        </div>
             <div id="col1-inner">
             <ul>
                 <li class="dog-list">
@@ -51,7 +54,7 @@
  
         <script type="text/template"  data-template="profile">        
             <div class="dog-profile" data-id="{{id}}">
-                <div id="big-title">{{Big-Title}}</div>
+                <p id="big-title">{{Big-Title}}</p>
                 <p class="dog-votes">Click Me!</p>
                 <p id="dog-name">--{{name}}--</p>
                 <img class="dog-image" src={{image}} width="300px" data-id="{{id}}" />

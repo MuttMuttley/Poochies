@@ -1,6 +1,6 @@
 
                 body{
-                   background-image: url("../images/dogBoneRed.png");
+                   background-image: url("../images/dogBoneRed2.png");
                    
                    font-family: "Comic Sans MS";
                    font-weight: bold;   
@@ -9,15 +9,24 @@
                 #title{
                     text-align: center;
                     color:black;
-                    font-size: 300%;
+                    font-size: 400%;
                     /*font-size: 5vw;*/
-                    background: rgba(139,69,19,0.3); 
+                    /*background: rgba(139,69,19,0.3); */
                     width: 100%;
+                    /*width: 20em;*/
                     margin-top: 0; 
                     margin-bottom: 2vh;
                 }
+                #header{
+                    text-align: center;
+                    font-size: 200%;
+                    /*width: 10em;*/
+                    margin-top: 0; 
+                    margin-bottom: 2vh;
+                    /*background-color: pink;*/
+                }
                 #col1{
-                    width: 25%; 
+                    /*width: 25%; */
                    /*width: 25vw;*/
                     position: relative;
                     float: left;  
@@ -31,9 +40,13 @@
                     
                    /* overflow:auto;*/
                     /*min-width: 20%;*/
-                   /* background-color: palegoldenrod;   */         
+                   /* background-color: palegoldenrod;  */ 
+                   width: 18em; /* 18em;  */
+                   overflow: auto;      
                 } 
-       
+                #header-buttons{
+                    width: 17em; /* 17em;*/
+                }
                 
                 #col1-inner{
                     width: 16em;
@@ -42,21 +55,23 @@
 
                     /*overflow: scroll;*/
                 }
-                
+               
                 .col2{
-                    width:5%;
+                    /*width:5%;*/
+                    width: 5em;
                     min-height: 3px;
-                    background-color: lime;
+                    /*background-color: lime;*/
                     position: relative;
                     float: left;
                 }
                 
              /*   .profile{*/
                  .main{
-                    width: 70%;
+                    width: 65%;
+                    /*width: 60em;*/
                     position: relative;
                     float: left; 
-                    background: rgba(139,69,19,0.3);  
+                   /* background: rgba(139,69,19,0.3); */ 
                  }
                     
                 #add-button{
@@ -65,6 +80,7 @@
                     /*padding-bottom: 4px;*/
                     padding-bottom: 0.5vh;
                     text-align: left;
+                    margin: 0;
                 }
                 .sorry{
                     font-size: 200%;
@@ -73,7 +89,7 @@
                 }
                 
                 .dog-list{
-                    background: rgba(139,69,19,0.3);
+                    /*background: rgba(139,69,19,0.3);*/
                     list-style-type: none;
                     width: 80%;
                     text-align: left;
@@ -82,7 +98,7 @@
                 .buttons{
                     border: solid 1px black;
                     background-color:burlywood;
-                    /*border-radius: 5px;*/
+                    font-size: 100%;
                     
                 }
                 .nameStyle{
@@ -100,8 +116,8 @@
                 }
                 .dog-image{
                    /* width: 200px;*/
-                    width:  30%;
-                    height:  30%;
+                    width: 35%; /*  30%;*/
+                    height: 35%; /*  30%;*/
                     margin-bottom: 2%; /* 3px;*/
                    border: solid 2px rosybrown;
                    /*border: solid 2px peru;*/
@@ -124,8 +140,8 @@
                     color: red;
                     /*color: black;*/
                     min-height: 1em;
-                    font-size:  150%;
-                    
+                    font-size: 200%; /* 150%; */
+                    margin-bottom: 0;
                 }
 
                 .no-votes{
@@ -140,12 +156,14 @@
                 }
 
                 .toggleBig{ 
-                    font-size: 200%; /* 150%; */
+                    font-size: 300%; /* 200%; */
                     min-height: 1em;
                 }
                 #big-title{
-                    font-size: 200%;
+                    font-size: 350%;
                     font-weight: bold;
+                    color: #0066ff;
+    
                 }
                 /*.add-dog, .reset-clicks, .top-dog{*/
                 #add-button > input{
@@ -153,10 +171,12 @@
                     border: solid 1px black;
                     font-family: "Comic Sans MS";
                     font-weight: bold;
+                    font-size: 100%;
+                    /*white-space: normal;*/
                    /* font-size: 1em;*/
                     /*width: 30%;*/
                 }
-                .add-dog{
+               /* .add-dog{
                     width: 7vw;
                 }
                 .reset-clicks{
@@ -164,7 +184,7 @@
                 }
                 .top-dog{
                     width: 7vw;
-                }
+                }*/
 
                 .footer{
                     /*position: absolute;*/
@@ -182,7 +202,7 @@
                     
                 }
                 .welcome{
-                    font-size: 120%;
+                    font-size: 150%; /*120;*/
                     text-align: center;
                     /*float: right;*/
                 }
@@ -199,5 +219,11 @@
                 }
                 .welcome li{
                     text-align: left;
+                }
+                #bye{
+                    width: 100px;
+                    
+                    border-radius: 50px;
+                    vertical-align: middle;
                 }
                 
