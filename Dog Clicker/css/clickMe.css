@@ -74,8 +74,8 @@
                     position: relative;
                     float: left; 
                     background:yellow; /* rgba(139,69,19,0.3); */ 
-                   margin-left: 30px;
-                   margin: 0;
+                  
+                   margin: 0 0 0 10px;
                    padding: 0;
                  }
                     
@@ -127,17 +127,24 @@
                    border: solid 2px rosybrown;
                    /*border: solid 2px peru;*/
                 }
-                  
+               /*   
                 .dog-profile{
-                    /* could probably put all under .dog-profile*/
+                    
+                    font-weight: bold;
+                    text-align: center;
+                    font-size: 100%;
+                    color:black;        
+                } 
+                */
+                .profile{
                     font-weight: bold;
                     text-align: center;
                     font-size: 100%;
                     color:black;
-                    background-color: skyblue;
                     margin: 0;
-                    /*font-stretch: ultra-expanded;*/
-                }  
+                    padding: 0;
+                    background-color: pink;
+                } 
                 #dog-name{
                     font-size: 150%;
                     
