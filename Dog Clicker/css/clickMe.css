@@ -41,8 +41,8 @@
                    /* overflow:auto;*/
                     /*min-width: 20%;*/
                     background-color: palegoldenrod;   
-                   width: 34vw; /* 18em;  */
-                   overflow: auto;      
+                   width: 32vw; /* 18em;  */
+                   overflow: hidden;      
                 } 
                 #header-buttons{
                     width: 350px; /* 17em;*/
