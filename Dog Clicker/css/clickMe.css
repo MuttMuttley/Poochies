@@ -73,9 +73,9 @@
                     /*width: 60em;*/
                     position: relative;
                     float: left; 
-                    background: pink; /* rgba(139,69,19,0.3); */ 
+                    background:yellow; /* rgba(139,69,19,0.3); */ 
                    margin-left: 30px;
-                
+                   margin: 0;
                    padding: 0;
                  }
                     
