@@ -137,13 +137,14 @@
                 } 
                 */
                 .profile{
+                    vertical-align: top;
                     font-weight: bold;
                     text-align: center;
                     font-size: 100%;
                     color:black;
                     margin: 0;
                     padding: 0;
-                    background-color: pink;
+                    background-color:skyblue;
                 } 
                 #dog-name{
                     font-size: 150%;
