@@ -40,38 +40,40 @@
                     
                    /* overflow:auto;*/
                     /*min-width: 20%;*/
-                   /* background-color: palegoldenrod;  */ 
-                   width: 18em; /* 18em;  */
+                    background-color: palegoldenrod;   
+                   width: 34vw; /* 18em;  */
                    overflow: auto;      
                 } 
                 #header-buttons{
-                    width: 17em; /* 17em;*/
+                    width: 350px; /* 17em;*/
                 }
                 
                 #col1-inner{
-                    width: 16em;
-                    height: 9em;
+                    width: 300px; /*16em;*/
+                    height: 200px; /* 9em;*/
                     overflow: auto;
 
                     /*overflow: scroll;*/
                 }
                
-                .col2{
-                    /*width:5%;*/
-                    width: 5em;
+               /* .col2{
+                   
+                   
                     min-height: 3px;
-                    /*background-color: lime;*/
+                   
                     position: relative;
                     float: left;
                 }
+                */
                 
              /*   .profile{*/
                  .main{
-                    width: 65%;
+                    width: 60vw; /* 65%;*/
                     /*width: 60em;*/
                     position: relative;
                     float: left; 
-                   /* background: rgba(139,69,19,0.3); */ 
+                    background: rgba(139,69,19,0.3);  
+                   margin-left: 30px;
                  }
                     
                 #add-button{
