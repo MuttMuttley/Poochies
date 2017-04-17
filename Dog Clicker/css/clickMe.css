@@ -40,9 +40,10 @@
                     
                    /* overflow:auto;*/
                     /*min-width: 20%;*/
-                    background-color: palegoldenrod;   
-                   width: 32vw; /* 18em;  */
-                   overflow: hidden;      
+                    background-color: pink;   
+                   width: 30vw; /* 18em;  */
+                   overflow: hidden;   
+                   margin-left: 0;   
                 } 
                 #header-buttons{
                     width: 350px; /* 17em;*/
