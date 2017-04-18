@@ -1,21 +1,19 @@
 
  
             $(function(){
-
-                //jQuery('.scrollbar-dynamic').scrollbar();
-                //$('.col1-inner').niceScroll({cursorcolor:"#331a00"});
-
-               /* $('#col1').niceScroll(
-                            {cursorcolor:"#ff0066", background:"#66b3ff"
-                              ,autohidemode: false
-                            });
-                            */
-                          
-
+                /*The number of dogs that can be added to the list is
+                 *limited by the number of images listed in the
+                 *'dogImages' array. For every dog listed in that
+                 *array a corresponding name needs to be entered
+                 *into the dogNames array.
+                 */
+             
+                /*use niceScroller on dynamic list*/
                 var scroller;                        
 
                 var pathToImages="images/dogPics/";
 
+                
                 var dogImages=["jackRussel.png","poodle2.png","cat.png", 
                                 "jumpingWhiteDog.png" ,"chiwawa.png",
                                  "bassetHound.png","happyDog.png",
@@ -56,11 +54,11 @@
                     var mostclicks;
                     var dogID=-1;
                     if(this.length > 0){
-                        mostclicks= this[0].votes;
+                        mostclicks= this[0].clicks;
                         dogID = this[0].id;
                         for(var i= 0; i< this.length; i++)
-                            if(this[i].votes > mostclicks){
-                                mostclicks = this[i].votes;
+                            if(this[i].clicks > mostclicks){
+                                mostclicks = this[i].clicks;
                                 dogID = this[i].id;
                             }
                                 
@@ -75,36 +73,33 @@
                     
                 };
 
-                var controller={                  
-                    addDog: function(){
-                        
-                        //To work on renumbering ids
+                var controller={ 
+
+                    /*Adds a dog*/                 
+                    addDog: function(){                       
+                        //Dog IDs start at 1
                         var thisID= model.dogs.length+1;
-                        
-                        //var renderType = "";
+
                         if(thisID > dogNames.length){
-                            //renderType = -1;
                             controller.NoMoreDogs();
                         }
                         else{
                              var thisPic= ++model.lastID;
-                             //for new system with limited dog #
                              var i=0;
                              while(dogNames[(thisID-1+i)%(dogNames.length)].isUsed){
                                  i++;
                              }
                              var index=thisID-1+i;
-                            var dogName=dogNames[index%(dogNames.length)].name;
-                            dogNames[index%(dogNames.length)].isUsed=true;
-                            var dogImage= dogImages[index%(dogImages.length)];
-                        
+                             var dogName=dogNames[index%(dogNames.length)].name;
+                             dogNames[index%(dogNames.length)].isUsed=true;
+                             var dogImage= dogImages[index%(dogImages.length)];   
                             var dogImageFull=pathToImages.concat(dogImage);
                     
                              model.dogs.push({
                                 id: thisID,
                                 name: dogName,
                                 image: dogImageFull,
-                                votes: 0,
+                                clicks: 0,
                             });          
                             model.currentProfileID = thisID;
                             
@@ -115,9 +110,8 @@
                                            
                     },
 
-                    removeDog: function(dog){
-                       
-                       
+                    /*Remove a dog*/
+                    removeDog: function(dog){          
                         var dogImage = model.dogs[dog.id-1].image.replace(pathToImages,'');
                         var index = dogImages.indexOf(dogImage);
                         var dogName= model.dogs[dog.id-1].name;
@@ -148,24 +142,23 @@
                         return model.currentProfileID;
                     },
 
-                    dogProfile: function(dogID){
-                        
+                    dogProfile: function(dogID){   
                         view.renderProfile(dogID);
                         view.renderWelcome(false);
                         view.renderFooter();
                     },
 
-                    addVote: function(){
+                    /*Increment click-counter*/
+                    addClick: function(){
                         var dogID= this.getCurrentProfileID();
-                        var no_votes = model.dogs[dogID-1].votes++;
+                        model.dogs[dogID-1].clicks++;
                         controller.dogProfile(dogID);
                     },
 
                     getMostClicks: function(){
-                      
                         var mostclicks=model.dogs.mostClicks();
                         function hasMostClicks(dogs){
-                            return (dogs.votes == mostclicks);
+                            return (dogs.clicks == mostclicks);
                         }
                         var topDogs = model.dogs.filter(hasMostClicks);
 
@@ -175,9 +168,10 @@
                         
                     },
 
+                    /*Reset all click-counters back to zero*/
                     resetClicks: function(){
                         for(var i=0; i< model.dogs.length; i++){
-                            model.dogs[i].votes=0;
+                            model.dogs[i].clicks=0;
                         }
                         
                         view.renderReset();
@@ -199,12 +193,12 @@
                     },
 
                     NoMoreDogs: function(){
-                        
                         view.renderNoMoreDogs();
                         view.renderWelcome(false);
                         view.renderFooter();  
                     },
 
+                    /*Render "Bye" page when remove dog*/
                     bye: function(dogName){
                         view.renderBye(dogName);
                         view.renderWelcome(false);
@@ -214,11 +208,18 @@
                 };
 
                 var view={
-
-                   
+                  
                     init: function(){
+                        this.$dogList=$('.dog-list');
+                        this.dogListTemplate=$('script[data-template="names"]').html();
+                        this.$welcome=$('.welcome');
+                        this.$footer=$('.footer');
+                        this.$dogProfile = $('.profile');
+                        this.profileTemplate= $('script[data-template="profile"]').html();
 
-                      
+                      /*-------Event Listeners-------*/
+
+                      /*Add a dog*/
                         var addDogBtn=$('.add-dog');
                         addDogBtn.click(   
                             function(){
@@ -226,6 +227,7 @@
                             
                         });
                         
+                        /*Display the dogs with the most clicks*/
                         var topDogBtn=$('.top-dog');
                         topDogBtn.click(
                             function(){
@@ -233,6 +235,7 @@
                             }
                         );
 
+                        /*Reset all click-counters back to zero*/
                         var resetClicksBtn=$('.reset-clicks');
                         resetClicksBtn.click(
                             function(){
@@ -246,62 +249,43 @@
                                 controller.instructions();
                             }
                         );
-     
-                        this.$dogList=$('.dog-list');
-                        this.dogListTemplate=$('script[data-template="names"]').html();
-
-                        this.$welcome=$('.welcome');
-
-                        this.$footer=$('.footer');
-
                        
                         this.$dogList.on('click','.remove-dog',function(){
-                            var dog=$(this).parents('.namesList').data();
-                                               
+                            var dog=$(this).parents('.namesList').data();                           
                             controller.removeDog(dog);
                         });
 
-                        this.$dogProfile = $('.profile');
-                        this.profileTemplate= $('script[data-template="profile"]').html();
-
-                        this.$dogList.on('click','.dog-name',function(){
-                            
-                            var dogID=($(this).parents('.namesList').data()).id;
-                            
+                        /*Load the dog's profile when its name is clicked on*/
+                        this.$dogList.on('click','.dog-name',function(){             
+                            var dogID=($(this).parents('.namesList').data()).id;             
                             controller.setCurrentProfileID(dogID);
                             controller.dogProfile(dogID);
                         });
 
-                        
+                        /*Increment dog's click-counter when its image is clicked on*/
                         this.$dogProfile.on('click',"img",function(event){
-                            
-                             
                             var currentId=event.target.getAttribute("data-id");
                             controller.setCurrentProfileID(currentId);
                             controller.dogProfile(currentId);
-                            
-                            var $muttVotes=$(".profile .dog-profile .dog-votes");
-                            if(model.dogs[currentId-1].image.indexOf("cat.png")>=0){
-                                 
-                                $muttVotes.html("Hey!! You're No Dog!!");
-                                $muttVotes.addClass("toggleBig");
-                                 $muttVotes.effect("pulsate",{times:1});
-                                  
-                            } else{
-                                var no_votes= model.dogs[currentId-1].votes+1;                          
-                                $muttVotes.html("Hot Dog!");
-                                $muttVotes.addClass("toggle");                   
-                                $muttVotes.toggleClass("toggleBig",100);
+                            var $muttClicks=$(".profile .dog-profile .dog-clicks");
+
+                            if(model.dogs[currentId-1].image.indexOf("cat.png")>=0){  
+                                $muttClicks.html("Hey!! You're No Dog!!");
+                                $muttClicks.addClass("toggleBig");
+                                $muttClicks.effect("pulsate",{times:1});      
+                            } else{                         
+                                $muttClicks.html("Hot Dog!");
+                                $muttClicks.addClass("toggle");                   
+                                $muttClicks.toggleClass("toggleBig",100);
 
                                 var demoTimeout;
-                                $muttVotes.jrumble({x:30, y:5, rotation: 5, speed: 50});
-                                $hotdog=$muttVotes;
+                                $muttClicks.jrumble({x:30, y:5, rotation: 5, speed: 50});
+                                $hotdog=$muttClicks;
                                 clearTimeout(demoTimeout);
                                 $hotdog.trigger('startRumble');
                                 demoTimeout=setTimeout(function(){
                                     $hotdog.trigger('stopRumble');
-                                    
-                                    controller.addVote();
+                                    controller.addClick();
                                 }, 800
                                 );       
                             }                                         
@@ -312,118 +296,110 @@
                         this.renderFooter();
                     },
 
+                    /*Render the list of dogs in the Profiles list*/
                     renderNames: function(){
                         var $dogList=this.$dogList;
                         var dogListTemplate=this.dogListTemplate;
                         $dogList.html('');
-                        model.dogs.forEach(function(dog){
-                            
+
+                        model.dogs.forEach(function(dog){      
                             var thisTemplate=dogListTemplate.replace(/{{name}}/g,dog.name)
                                                             .replace(/{{id}}/g,dog.id);
-                            
-                            $dogList.append(thisTemplate);
-                            
+                            $dogList.append(thisTemplate); 
                         });  
-                         
+
+                        /*Use 'niceScroll' scrollbar when list gets too long. */ 
                         if(scroller == undefined){
                             scroller= $('#col1-inner').niceScroll(
-                            {cursorcolor:"#0066ff", background:"#ffffff"
-                              ,cursorborder: "1px solid #0066ff"
-                              ,autohidemode: false
+                            {cursorcolor:"#0066ff",
+                                    background:"#ffffff",
+                                    cursorborder: "1px solid #0066ff",
+                                    autohidemode: false
                             });
                         }
                         else{
                             $("#col1-inner").getNiceScroll().resize();
-                        }
-                        
-                                          
-                    },
-
-                    renderBlank: function(){
-                         var $dogProfile=this.$dogProfile;
-                         $dogProfile.html('');
-                           
-                    },
-
-                    renderNoMoreDogs: function(){ 
-                        var $dogProfile=this.$dogProfile;
-                        var noDogsMessage=
-                            "<p class=\"sorry\">"+
-                                "Sorry!, no more dogs"
-                            "</p>"
-                             ;
-                        $dogProfile.html(noDogsMessage);                         
-                    },
-
-                    renderReset: function(){
-                        var $dogProfile=this.$dogProfile;
-                        var ResetMessage=
-                        "<p class=\"sorry\">" +
-                        "All Click Counters Reset to Zero"+
-                        "</p>";
-                        $dogProfile.html(ResetMessage);
-                        
+                        }                  
                     },
 
                     renderProfile: function(dogID){
+                        var dog= model.dogs[dogID-1];
+                        var $dogProfile=this.$dogProfile;
+                        var profileTemplate=$('script[data-template="profile"]').html();
+                        $dogProfile.html('');
                         
-                            var dog= model.dogs[dogID-1];
-                            var $dogProfile=this.$dogProfile;
-                            var profileTemplate=$('script[data-template="profile"]').html();
-                            $dogProfile.html('');
-                        
-                            var thisTemplate=profileTemplate.replace(/{{id}}/g,dog.id)
+                        var thisTemplate=profileTemplate.replace(/{{id}}/g,dog.id)
                                                         .replace(/{{Big-Title}}/g,"")
                                                         .replace(/{{name}}/g,dog.name)
                                                         .replace(/{{image}}/g,dog.image)
-                                                        .replace(/{{votes}}/g,dog.votes);
+                                                        .replace(/{{clicks}}/g,dog.clicks);
                         
-                            $dogProfile.append(thisTemplate);
-                                                  
+                        $dogProfile.append(thisTemplate);                      
                     },
 
                     renderProfiles: function(SelectDogs){
                         var $dogProfile=this.$dogProfile;
                         var profileTemplate=$('script[data-template="profile"]').html();
                         $dogProfile.html('');
+
                         SelectDogs.forEach(function(dog){
                             var thisTemplate=profileTemplate.replace(/{{id}}/g,dog.id)
                                                 .replace(/{{Big-Title}}/g,"Dogtastic!")
                                                 .replace(/{{name}}/g,dog.name)
                                                 .replace(/{{image}}/g,dog.image)
-                                                 .replace(/{{votes}}/g,dog.votes);
+                                                 .replace(/{{clicks}}/g,dog.clicks);
                             
                             $dogProfile.append(thisTemplate);
-                    });
-                        
-                },
+                        });     
+                    },
 
-                renderFooter: function(){
+                    renderBlank: function(){
+                         var $dogProfile=this.$dogProfile;
+                         $dogProfile.html('');   
+                    },
+
+                    renderNoMoreDogs: function(){ 
+                        var $dogProfile=this.$dogProfile;
+                        var noDogsMessage=
+                            "<p class=\"message-text\">"+
+                                "Sorry!, no more dogs"
+                            "</p>";
+                        $dogProfile.html(noDogsMessage);                         
+                    },
+
+                    renderReset: function(){
+                        var $dogProfile=this.$dogProfile;
+                        var ResetMessage=
+                            "<p class=\"message-text\">" +
+                            "All Click Counters Reset to Zero"+
+                            "</p>";
+                        $dogProfile.html(ResetMessage);
+                    },
+
+                    renderFooter: function(){
                         var $footer= this.$footer;
                         $footer.html('');
                         $footer.html("<p>Copyright &copy; Nonsense Tails Ltd. 2017"
-                        +  "&nbsp; &nbsp; &nbsp;Images from"
-                        + "&nbsp; <span style=\"font-style: italic;\"> Google-Images</span></p>");
-                },
+                            +  "&nbsp; &nbsp; &nbsp;Images from"
+                            + "&nbsp; <span style=\"font-style: italic;\"> Google-Images</span></p>");
+                    },
 
-                renderBye: function(dogName){
-                    var $dogProfile=this.$dogProfile;
-                    var sadPug=pathToImages.concat("sadPug.png"); 
-                    var byeMessage= "<p class=\"sorry\">"+
-                    "Bye Bye "+ dogName + "&nbsp;"+
-                    "<img id= \"bye\" src = \"images/dogPics/sadFace.png\" />" +
-                    "</p>";
-                    $dogProfile.html(byeMessage);
-                },
+                    renderBye: function(dogName){
+                        var $dogProfile=this.$dogProfile;
+                        var byeMessage= "<p class=\"message-text\">"+
+                            "Bye Bye "+ dogName + "&nbsp;"+
+                            "<img id= \"bye\" src = \"images/dogPics/sadFace.png\" />" +
+                            "</p>";
+                        $dogProfile.html(byeMessage);
+                    },
 
+                    renderWelcome: function(show){
+                        var $welcome=this.$welcome;
+                        var welcomeString='';
+                        $welcome.html('');
 
-                renderWelcome: function(show){
-                    var $welcome=this.$welcome;
-                    var welcomeString='';
-                   
-                    $welcome.html('');
-                    if(show){
-                        welcomeString=               
+                        if(show){
+                            welcomeString=               
                         "<p>" +
                         "Welcome to DogClicker! This is a JavaScript code sample based on cowclicker.com, "+
                         "where one clicks on an image of a cow to increment a click-counter. "+
@@ -445,12 +421,9 @@
                         "</p>"+
                         "<p style=\"font-style: italic\">"+
                         "Not designed for use with mobile devices."+
-                        "</p>"
-                        ;
-                    }
-                    
-                     $welcome.html(welcomeString);
-                     
+                        "</p>";
+                        }
+                         $welcome.html(welcomeString);      
                 }
                 
                 };

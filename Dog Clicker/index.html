@@ -2,7 +2,7 @@
 <html>
     <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Dog Clicker</title>
+            <title>Wex Wuffley's Dog Clicker</title>
             <link  rel="stylesheet" href="external/jquery-ui-1.12.1/jquery-ui.css">     
             <link  rel="stylesheet" href="css/clickMe.css">           
     </head>
@@ -10,32 +10,30 @@
         
         <h1 id="title">--Dog Clicker!--</h1>  
         
+        <!-- Profiles List-->
         <div id="col1">
-            
             <div id="header-buttons">
                 <p id="header">Profiles</p>
-            <ul>
-                
-              <li id="add-button">   
-                               
+                <ul>
+                    <li id="header-button">         
                         <input type="button" value="Add Dog" class="add-dog" />
                         <input type="button" value="Reset" class="reset-clicks" />
-                        <input type="button" value="Top Dog" class="top-dog" /> 
-                                 
-                </li>  
-                <li id="add-button" >
-                    <input type="button" value="Instructions" class="instructions"/>
-                </li>      
-            </ul>   
-        </div>
+                        <input type="button" value="Top Dog" class="top-dog" />             
+                    </li>  
+                    <li id="header-button" >
+                        <input type="button" value="Instructions" class="instructions"/>
+                    </li>      
+                </ul>   
+            </div>
             <div id="col1-inner">
-            <ul>
-                <li class="dog-list">
-                </li>  
-            </ul> 
+                <ul>
+                    <li class="dog-list">
+                    </li>  
+                </ul> 
             </div>         
         </div>
 
+        <!-- Template used to add dogs to the Profiles list -->
         <script type="text/template" data-template="names">           
             <li class="namesList" data-id="{{id}}">
                <label class="dog-name buttons">{{name}}</label>
@@ -43,24 +41,23 @@
             </li>           
         </script>
 
-        <div class="col2"></div>
-
-
-<div class="main">
-        <div class="profile"></div>
-        <div class="welcome"></div>
-        <div class="footer"></div>
-</div>
+        <!-- Main area where dog profiles and messages are displayed-->
+        <div class="main">
+            <div class="profile"></div>
+            <div class="welcome"></div>
+            <div class="footer"></div>
+        </div>
  
+        <!-- Template used to add a dog profile to the main area -->
         <script type="text/template"  data-template="profile">        
             <div class="dog-profile" data-id="{{id}}">
                 <p id="big-title">{{Big-Title}}</p>
-                <p class="dog-votes">Click Me!</p>
+                <p class="dog-clicks">Click Me!</p>
                 <p id="dog-name">--{{name}}--</p>
                 <img class="dog-image" src={{image}} width="300px" data-id="{{id}}" />
                 <br/>
-                <div class="dog-votes"><span class="no-votes">
-                    Number of Clicks:</span> &nbsp; &nbsp; {{votes}} &nbsp;!
+                <div class="dog-clicks"><span class="no-clicks">
+                    Number of Clicks:</span> &nbsp; &nbsp; {{clicks}} &nbsp;!
                 </div>
                 <br/><br/>
             </div>
