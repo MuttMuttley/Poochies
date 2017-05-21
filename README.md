@@ -1,2 +1,2 @@
-# WexWuffley.github.io
+# muttmuttley.github.io
 Developing responsive website -- practicing Javascript ect...
