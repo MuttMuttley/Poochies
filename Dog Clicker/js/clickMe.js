@@ -14,8 +14,8 @@
                 var pathToImages="images/dogPics/";
 
                 
-                var dogImages=["jackRussel.png","poodle2.png","cat.png", 
-                                "jumpingWhiteDog.png" ,"chiwawa.png",
+                var dogImages=["jackRussel.png","jumpingWhiteDog.png" ,"cat.png", 
+                                 "poodle2.png","chiwawa.png",
                                  "bassetHound.png","happyDog.png",
                                  "airdaleTerrior.png","exitedDog1.png",
                                  "japaneseDog.png","smallDog.png",
@@ -24,9 +24,9 @@
                
 
                  var dogNames=[{name:"Percival",isUsed:false},
-                               {name:"Henrietta", isUsed:false},
-                               {name:"Muttley", isUsed:false},
                                {name:"Skippy",isUsed: false},
+                               {name:"Muttley", isUsed:false},
+                               {name:"Henrietta", isUsed:false},
                                {name:"Harold", isUsed: false},
                                {name:"Barney", isUsed:false},
                                {name:"Magnus", isUsed:false},
@@ -354,7 +354,7 @@
                                                  .replace(/{{clicks}}/g,dog.clicks);
                             
                             $dogProfile.append(thisTemplate);
-                            var $muttPic = $(".dog-image");
+
                            $dogProfile.jrumble({x:4, y:4, rotation: 1, speed: 100});
                            $dogProfile.trigger('startRumble');
                         });     
