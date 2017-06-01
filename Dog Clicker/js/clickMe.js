@@ -287,8 +287,10 @@
                                     $hotdog.trigger('stopRumble');
                                     controller.addClick();
                                 }, 800
-                                );       
-                            }                                         
+                                );     
+
+                            }
+
                         });
 
                         this.renderNames();
@@ -334,7 +336,9 @@
                                                         .replace(/{{image}}/g,dog.image)
                                                         .replace(/{{clicks}}/g,dog.clicks);
                         
-                        $dogProfile.append(thisTemplate);                      
+                        $dogProfile.append(thisTemplate);     
+                        $dogProfile.jrumble({x:4, y:4, rotation: 1, speed: 100});
+                        $dogProfile.trigger('startRumble');
                     },
 
                     renderProfiles: function(SelectDogs){
@@ -350,6 +354,9 @@
                                                  .replace(/{{clicks}}/g,dog.clicks);
                             
                             $dogProfile.append(thisTemplate);
+                            var $muttPic = $(".dog-image");
+                           $dogProfile.jrumble({x:4, y:4, rotation: 1, speed: 100});
+                           $dogProfile.trigger('startRumble');
                         });     
                     },
 
@@ -364,7 +371,8 @@
                             "<p class=\"message-text\">"+
                                 "Sorry!, no more dogs"
                             "</p>";
-                        $dogProfile.html(noDogsMessage);                         
+                        $dogProfile.html(noDogsMessage);
+                        $dogProfile.trigger('stopRumble');                         
                     },
 
                     renderReset: function(){
@@ -374,6 +382,7 @@
                             "All Click Counters Reset to Zero"+
                             "</p>";
                         $dogProfile.html(ResetMessage);
+                        $dogProfile.trigger('stopRumble');
                     },
 
                     renderFooter: function(){
@@ -391,6 +400,7 @@
                             "<img id= \"bye\" src = \"images/dogPics/sadFace.png\" />" +
                             "</p>";
                         $dogProfile.html(byeMessage);
+                        $dogProfile.trigger('stopRumble');
                     },
 
                     renderWelcome: function(show){
